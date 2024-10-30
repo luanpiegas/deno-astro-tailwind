@@ -1,0 +1,41 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+const users = fetch("https://jsonplaceholder.typicode.com/users").then((res) => res.json());
+const data = await users;
+
+export async function getStaticPaths() {
+    const users = fetch("https://jsonplaceholder.typicode.com/users").then((res) => res.json());
+    const data = await users;
+    return data.map((user) => ({
+        params: { user: user.username.toLowerCase() },
+    }));
+}
+
+const { user } = Astro.params;
+
+const userObject = data.find((item) => item.username.toLowerCase() === user);
+
+if (!userObject) return Astro.redirect("/404");
+
+const { name, email, username } = userObject;
+---
+<Layout title={ name }>
+
+    <a class="text-center mb-10 text-xl text-slate-400 font-bold hover:underline" href="/"> Go back </a>
+
+    <div class="flex flex-col items-center justify-center">
+        <h1 class="text-center text-3xl font-bold">{ name }</h1>
+        <a class="text-slate-400 font-normal text-xl" href="/">@{ username.toLowerCase() }</a>
+
+        <p class="text-center">
+            { email.toLowerCase() }
+        </p>
+    </div>
+</Layout>
+
+<style>
+    body {
+        @apply bg-slate-800 text-white;
+    }
+</style>

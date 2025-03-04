@@ -1,6 +1,6 @@
 {
   "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
-    "lib": ["DOM"],
+    "lib": ["DOM", "ESNext", "ES2015"],
   }
 }

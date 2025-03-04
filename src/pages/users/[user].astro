@@ -7,14 +7,14 @@ const data = await users;
 export async function getStaticPaths() {
     const users = fetch("https://jsonplaceholder.typicode.com/users").then((res) => res.json());
     const data = await users;
-    return data.map((user) => ({
+    return data.map((user: any) => ({
         params: { user: user.username.toLowerCase() },
     }));
 }
 
 const { user } = Astro.params;
 
-const userObject = data.find((item) => item.username.toLowerCase() === user);
+const userObject = data.find((item: any) => item.username.toLowerCase() === user);
 
 if (!userObject) return Astro.redirect("/404");
 

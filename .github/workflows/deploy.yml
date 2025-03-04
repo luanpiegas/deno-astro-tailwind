@@ -38,7 +38,7 @@ jobs:
         uses: denoland/deployctl@v1
         with:
           project: "luanpiegas-deno-astro-44"
-          entrypoint: "src/pages/index.astro"
+          entrypoint: "dist/index.html"
           root: "dist"
           
           
